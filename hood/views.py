@@ -148,3 +148,28 @@ def profiles(request):
     current_user = request.user
     profiles = Profile.objects.all().order_by('-id')
     return render(request, 'profiles.html', {'profiles': profiles,'current_user':current_user})
+
+
+
+
+@login_required(login_url="/accounts/login/")
+def businesses(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    
+
+    if profile is None:
+        profile = Profile.objects.filter(
+            user_id=current_user.id).first()
+        
+        
+        locations = Location.objects.all()
+        neighborhood = AnimalsRanch.objects.all()
+        
+        
+        
+        return render(request, "profile.html", {"danger": "Update Profile", "locations": locations, "neighborhood": neighborhood, "businesses": businesses})
+    else:
+        neighborhood = profile.neighborhood
+    
+        return render(request, "business.html", {"businesses": businesses})
