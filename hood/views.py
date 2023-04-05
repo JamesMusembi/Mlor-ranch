@@ -164,12 +164,12 @@ def businesses(request):
         
         
         locations = Location.objects.all()
-        neighborhood = AnimalsRanch.objects.all()
+        animalsranch = AnimalsRanch.objects.all()
         
         
         
-        return render(request, "profile.html", {"danger": "Update Profile", "locations": locations, "neighborhood": neighborhood, "businesses": businesses})
+        return render(request, "profile.html", {"danger": "Update Profile", "locations": locations, "animalsranch": animalsranch, "businesses": businesses})
     else:
-        neighborhood = profile.neighborhood
+        animalsranch = profile.animalsranch
     
         return render(request, "business.html", {"businesses": businesses})
