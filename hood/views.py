@@ -12,7 +12,7 @@ def index(request):
     hood = AnimalsRanch.objects.all().order_by('-id')
     return render(request, 'index.html',{'hood': hood})
 
-@login_required(login_url="/accounts/login/")
+
 def profile(request):
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
@@ -43,12 +43,6 @@ def update_profile(request,id):
 
 
 
-
-
-@login_required(login_url="/accounts/login/")
-
-
-@login_required(login_url="/accounts/login/")
 def create_hood(request):
     current_user = request.user
     if request.method == 'POST':
@@ -70,7 +64,7 @@ def hood(request):
     return render(request, 'hoods.html', {'hood': hood,'current_user':current_user})
 
 
-@login_required(login_url='/accounts/login/')
+
 def single_hood(request,name):
     current_user = request.user
     hood = AnimalsRanch.objects.get(name=name)
@@ -82,21 +76,21 @@ def single_hood(request,name):
     
     return render(request,'single_hood.html',{'hood': hood,'posts':posts,'current_user':current_user,
                                                             'profiles':profiles})
-login_required(login_url="/accounts/login/")
+
 def join_hood(request,id):
     animalsranch = get_object_or_404(AnimalsRanch, id=id)
     request.user.profile.animalsranch = animalsranch
     request.user.profile.save()
     return redirect('hood')
 
-login_required(login_url="/accounts/login/")
+
 def leave_hood(request, id):
     hood = get_object_or_404(AnimalsRanch, id=id)
     request.user.profile.animalsranch = None
     request.user.profile.save()
     return redirect('hood')    
 
-login_required(login_url="/accounts/login/")
+
 def create_post(request):
     current_user = request.user
     if request.method == 'POST':
