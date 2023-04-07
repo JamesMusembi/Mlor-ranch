@@ -84,7 +84,7 @@ class Profile(models.Model):
 class Post(models.Model):
     name = models.TextField(max_length=50,null=True)
     title = models.CharField(max_length=50,null=True)
-    content = models.TextField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
     photo = CloudinaryField("image",blank=True,null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True)

@@ -23,4 +23,4 @@ class HoodForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields=['title','content','location','animalsranch']
+        fields=['title','comment','location','animalsranch']
