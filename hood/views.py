@@ -12,6 +12,7 @@ def index(request):
     hood = AnimalsRanch.objects.all().order_by('-id')
     return render(request, 'index.html',{'hood': hood})
 
+@login_required(login_url="/accounts/login/")
 
 def profile(request):
     current_user = request.user
@@ -105,7 +106,7 @@ def create_post(request):
         form = PostForm()
     return render(request, 'post.html', {'form': form})
 
-login_required(login_url="/accounts/login/")
+
 def posts(request):
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
@@ -127,17 +128,7 @@ def posts(request):
         return render(request, "posts.html", {"posts": posts})
 
 @login_required(login_url="/accounts/login/")
-def search(request):
-    if 'search_term' in request.GET and request.GET["search_term"]:
-        search_term = request.GET.get("search_term")
-        message = f"Search For: {search_term}"
 
-        return render(request, "search.html", {"message": message, })
-    else:
-        message = "You haven't searched for any term"
-        return render(request, "search.html", {"message": message})
-
-@login_required(login_url="/accounts/login/")
 def profiles(request):
     current_user = request.user
     profiles = Profile.objects.all().order_by('-id')
