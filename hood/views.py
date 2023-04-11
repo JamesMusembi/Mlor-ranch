@@ -12,7 +12,7 @@ def index(request):
     hood = AnimalsRanch.objects.all().order_by('-id')
     return render(request, 'index.html',{'hood': hood})
 
-@login_required(login_url="/accounts/login/")
+
 
 def profile(request):
     current_user = request.user
@@ -58,7 +58,7 @@ def create_hood(request):
     context = {'hood_form':hood_form}
     return render(request, 'hood_form.html',context)
 
-@login_required(login_url="/accounts/login/")
+
 def hood(request):
     current_user = request.user
     hood =AnimalsRanch.objects.all().order_by('-id')
@@ -72,8 +72,7 @@ def single_hood(request,name):
     profiles = Profile.objects.filter(animalsranch=hood)
     
     posts = Post.objects.filter(animalsranch=hood)
-    request.user.profile.animalsranch = hood
-    request.user.profile.save()
+   
     
     return render(request,'single_hood.html',{'hood': hood,'posts':posts,'current_user':current_user,
                                                             'profiles':profiles})
@@ -87,8 +86,8 @@ def join_hood(request,id):
 
 def leave_hood(request, id):
     hood = get_object_or_404(AnimalsRanch, id=id)
-    request.user.profile.animalsranch = None
-    request.user.profile.save()
+    # request.user.profile.animalsranch = None
+    # request.user.profile.save()
     return redirect('hood')    
 
 
@@ -127,7 +126,7 @@ def posts(request):
         posts = Post.objects.all().order_by('-id')
         return render(request, "posts.html", {"posts": posts})
 
-@login_required(login_url="/accounts/login/")
+
 
 def profiles(request):
     current_user = request.user
